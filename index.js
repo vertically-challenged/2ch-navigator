@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const exphbs = require("express-handlebars");
 
 const error404 = require("./middleware/error404");
-const homeRoutes = require("./routes/home");
+const searchRouter = require("./routes/search");
 
 const app = express();
 const hbs = exphbs.create({
@@ -21,7 +21,7 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 
-app.use('/', homeRoutes); 
+app.use('/', searchRouter);
 app.use(error404);
 
 const PORT = process.env.PORT || 3000
