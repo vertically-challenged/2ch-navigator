@@ -1,18 +1,28 @@
 const express = require('express');
 const path = require('path');
-const app = express();
+const fetch = require('node-fetch');
+const exphbs = require("express-handlebars");
 
+const error404 = require("./middleware/error404");
+const homeRoutes = require("./routes/home");
+
+const app = express();
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    extname: 'hbs',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+    }
+});
+app.engine('hbs', hbs.engine);  
+app.set('view engine', 'hbs'); 
+app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-})
-app.use((req, res, next) => {
-    res.status(404);
-    res.sendFile(path.join(__dirname, 'views', '404.html'));
-});
+app.use('/', homeRoutes); 
+app.use(error404);
 
 const PORT = process.env.PORT || 3000
 

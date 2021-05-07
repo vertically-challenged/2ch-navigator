@@ -1,0 +1,38 @@
+.help__checkbox {
+    display: none;
+}
+
+.help__button {
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+    color: rgb(233, 151, 0);
+    opacity: .7;
+}
+
+.help__button:hover {
+    opacity: .7;
+    color: #555;
+    transition: .3s;
+}
+
+.help__button::before {
+    content: 'Cправка >';
+}
+
+.help__checkbox:checked ~ .help__button {
+    opacity: .7;
+    color: #555;
+}
+
+.help__checkbox:checked ~.help__button::before {
+    content: '< Свернуть справку';
+}
+
+.help__container {
+    display: none;
+}
+
+.help__checkbox:checked ~ .help__container {
+    display: block;
+}

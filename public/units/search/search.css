@@ -1,0 +1,53 @@
+.search__boards {
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid orange;
+    outline: none;
+    font-size: 18pt;
+    opacity: .7;
+    color: rgb(37, 37, 37);
+}
+
+.search__boards:focus {
+    border-bottom: 2px solid #555;
+    transition: .3s;
+}
+
+.search__line {
+    display: flex;
+}
+
+.search__input {
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    border: 3px solid orange;
+    border-radius: 4px 0px 0px 4px;
+    outline: none;
+    font-size: 18pt;
+    opacity: .7;
+}
+
+.search__input:focus {
+    border: 3px solid #555;
+    transition: .3s;
+}
+
+.search__button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 0px 4px 4px 0px;
+    background-color: orange;
+    opacity: .7;
+    cursor: pointer;
+    background-image: url('/images/search-icon.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.search__input:focus ~ .search__button{
+    background-color: #555;
+    transition: .3s;
+}
