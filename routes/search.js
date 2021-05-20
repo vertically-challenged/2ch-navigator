@@ -16,6 +16,7 @@ async function api () {
         })
 }
 
+// Удаляет пустые строки из массива строк, возвращает новый массив без пустых строк
 function deleteEmptyStringsFromArray (arr) {
     let newArr = []
     arr.forEach((item) => {
@@ -24,9 +25,21 @@ function deleteEmptyStringsFromArray (arr) {
     return newArr
 }
 
+// eraseFromString([Строка], [символ, которые необходимо из нее удалить]) => Новая строка без ненужного символа 
+function eraseFromString (str, char) {
+    let newStr = ''
+    str
+        .split('')
+        .forEach((item) => {
+            newStr += (item != char) ? item : '' 
+        })
+        
+    return newStr
+}
+
+// decompositionSearch(Строка search) => Объект search
 function decompositionSearch (search) {
-    // console.log(search)
-    let searchArr = deleteEmptyStringsFromArray(search.split(' '));
+    let searchArr = deleteEmptyStringsFromArray(search.split(' '))
     let text = [], modifier = [], files = []
 
     searchArr.forEach((item) => {
@@ -45,11 +58,21 @@ function decompositionSearch (search) {
     return {text, modifier, files}
 }
 
+// decompositionBoards(Строка boards) => массив досок без /
+function decompositionBoards (boards) {
+    let boardsArr = deleteEmptyStringsFromArray(boards.split(' '))
+    for (let idx in boardsArr) {
+        boardsArr[idx] = eraseFromString(boardsArr[idx], '/') 
+    }
+    return boardsArr
+}
+
 function createQueryObject (query) {
-    let searchObj = decompositionSearch(query.search);
+    let searchObj = decompositionSearch(query.search)
+    let boardsArr = decompositionBoards(query.boards)
 
     return {
-        board: query.boards.split(' '), 
+        board: boardsArr, 
         modifier: searchObj.modifier,
         text: searchObj.text.join(' '), 
         files: searchObj.files
@@ -57,10 +80,10 @@ function createQueryObject (query) {
 }
 
 router.get('/', (req, res) => {
-    console.log(createQueryObject (req.query));
+    req.query == undefined || console.log(createQueryObject (req.query))
     res.render('index', {
         title: '2ch navigator'
     });
 })
 
-module.exports = router;
+module.exports = router
