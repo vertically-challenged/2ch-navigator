@@ -7,12 +7,14 @@ class Bloodhound {
     }
 // Способы поиска описываются как методы будущего объекта
 
-    defaultSearch () {
+    async defaultSearch () {
+        // let result = await API_2ch.getListOfBoardThreads()
+        // console.log(result)
 
-    }
+        let result = await API_2ch.getThread()
+        console.log(result.Board)
 
-    say () {
-        console.log('Hello Bloodhound')
+        // API_2ch.getListOfBoardThreads()
     }
 }
 

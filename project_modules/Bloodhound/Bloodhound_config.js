@@ -1,1 +1,3 @@
-module.exports = {}
+module.exports = {
+    DEFAULT_BOARDS:['b', 'rf']
+}
