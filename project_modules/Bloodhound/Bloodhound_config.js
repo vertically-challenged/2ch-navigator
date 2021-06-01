@@ -1,3 +1,3 @@
 module.exports = {
-    DEFAULT_BOARDS:['b', 'rf']
+    DEFAULT_BOARDS:['b']
 }
