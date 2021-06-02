@@ -6,8 +6,8 @@ class Query {
         let searchObj = Query.decompositionSearch(query.search)
         let boardsArr = Query.decompositionBoards(query.boards)
 
-        this.board = boardsArr
-        this.modifier = searchObj.modifier
+        this.boards = boardsArr
+        this.modifiers = searchObj.modifier
         this.text = searchObj.text.join(' ')
         this.files = searchObj.files
     }
