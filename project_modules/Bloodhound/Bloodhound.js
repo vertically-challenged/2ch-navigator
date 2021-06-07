@@ -28,10 +28,8 @@ class Bloodhound {
                 let thirdOrderArray = []  // Посты только с текстом 
 
                 for (let post of allPosts) {
-                    console.log('Начали перебор постов...', post)
                     let itHasFiles = await Bloodhound.doesItHaveFiles(post, searchQuery.files)
                     let itHasText = await Bloodhound.doesItHaveText(post, searchQuery.text)
-                    console.log('itHasFiles: ', itHasFiles)
     
                     switch (true) {
                         case (itHasFiles && itHasText): 
@@ -39,8 +37,6 @@ class Bloodhound {
                             break
                         case itHasFiles: 
                             secondOrderArray.push(post)
-                            console.log('Файл найден в посте:')
-                            console.log(post)
                             break
                         case itHasText: 
                             thirdOrderArray.push(post)
@@ -58,7 +54,6 @@ class Bloodhound {
                 return firstOrderArray.concat(thirdOrderArray, secondOrderArray)
 
             } else if (checkFiles) {
-                console.log('Вошли в точку вызова doesItHaveFiles')
                 // Проверь не выполняются ли if по очереди 
                 let relevantPosts = []
                 for (let post of allPosts) {
@@ -81,8 +76,6 @@ class Bloodhound {
 
     // Принимает объект поста и возвращает true, если в нем есть подходящий файл, если нет 
     static async doesItHaveFiles (post, files) {
-        console.log('Началось выполнение doesItHaveFiles')
-        return true
         let nameCoincided = false 
 
         if (post.files.length != 0) {
@@ -90,10 +83,7 @@ class Bloodhound {
                 if (checksFile.fullname != undefined) {
                     let checksFileName = checksFile.fullname.split('.')[0] 
                     let checksFileType = checksFile.fullname.split('.')[1]
-                    console.log('Проверяем имя...')
                     for (let wantedFile of files) {
-                        console.log('checksFileName: ', checksFileName)
-                        console.log('wantedFile.fileName: ', wantedFile.fileName)
                         if (wantedFile.fileName.length == 0) {
                             nameCoincided = true
                         } else {
@@ -101,13 +91,7 @@ class Bloodhound {
                         }
 
                         if (nameCoincided) {
-                            console.log('Имя совпало, проверяем формат...')
-                            console.log('checksFileType: ', checksFileType)
-                            console.log('wantedFile.fileType: ', wantedFile.fileType)
-                            if (checksFileType == wantedFile.fileType) {
-                                console.log('Формат совпал, отправляем return')
-                                return true
-                            }
+                            if (checksFileType == wantedFile.fileType) return true
                             for (let tags of ALL_TYPE_TAGS) {
                                 if (wantedFile.fileType == tags) return true
                             }
@@ -126,7 +110,6 @@ class Bloodhound {
                                 }
                             }
                         }
-                        console.log('Имя не совпало, файл не найден')
                     }
                 }
             }

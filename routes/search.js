@@ -8,14 +8,14 @@ const Bloodhound = require('../project_modules/Bloodhound/Bloodhound')
 
 const bloodhoundObj = new Bloodhound()
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
         if (!(req.query == undefined || Object.keys(req.query).length == 0)) {
             let searchQuery = new Query(req.query)
             console.log(searchQuery)
             console.log('Запрос...')
 
-            bloodhoundObj.defaultSearch(searchQuery)
+            console.log('Релевантные посты', await bloodhoundObj.defaultSearch(searchQuery))
         }
     } catch (err) {
         console.log(err)
