@@ -13,8 +13,9 @@ router.get('/', (req, res) => {
         if (!(req.query == undefined || Object.keys(req.query).length == 0)) {
             let searchQuery = new Query(req.query)
             console.log(searchQuery)
+            console.log('Запрос...')
 
-            // bloodhoundObj.defaultSearch(searchQuery)
+            bloodhoundObj.defaultSearch(searchQuery)
         }
     } catch (err) {
         console.log(err)

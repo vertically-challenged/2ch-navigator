@@ -1,5 +1,10 @@
 const config = require('./Bloodhound_config')
 const API_2ch = require('../API_2ch/API_2ch')
+const ALL_TYPE_TAGS = config.fileTypeClasses.ALL_FILES.classNames
+const VIDEO_TYPE_TAGS = config.fileTypeClasses.VIDEO_FILES.classNames
+const VIDEO_FORMATS = config.fileTypeClasses.VIDEO_FILES.listOfFormats
+const IMG_TYPE_TAGS = config.fileTypeClasses.IMAGE_FILES.classNames
+const IMG_FORMATS = config.fileTypeClasses.IMAGE_FILES.listOfFormats
 
 class Bloodhound {
     constructor () {
@@ -10,6 +15,7 @@ class Bloodhound {
     async defaultSearch (searchQuery) {
         try {
             let allPosts = await Bloodhound.getData(searchQuery.boards, await Bloodhound.isOP(searchQuery.modifiers))
+            console.log('allPosts: ', allPosts.length)
 
             let checkFiles = (searchQuery.files.length != 0) ? true : false
             let checkText = (searchQuery.text.length != 0) ? true : false
@@ -22,8 +28,10 @@ class Bloodhound {
                 let thirdOrderArray = []  // Посты только с текстом 
 
                 for (let post of allPosts) {
+                    console.log('Начали перебор постов...', post)
                     let itHasFiles = await Bloodhound.doesItHaveFiles(post, searchQuery.files)
                     let itHasText = await Bloodhound.doesItHaveText(post, searchQuery.text)
+                    console.log('itHasFiles: ', itHasFiles)
     
                     switch (true) {
                         case (itHasFiles && itHasText): 
@@ -31,6 +39,8 @@ class Bloodhound {
                             break
                         case itHasFiles: 
                             secondOrderArray.push(post)
+                            console.log('Файл найден в посте:')
+                            console.log(post)
                             break
                         case itHasText: 
                             thirdOrderArray.push(post)
@@ -48,6 +58,7 @@ class Bloodhound {
                 return firstOrderArray.concat(thirdOrderArray, secondOrderArray)
 
             } else if (checkFiles) {
+                console.log('Вошли в точку вызова doesItHaveFiles')
                 // Проверь не выполняются ли if по очереди 
                 let relevantPosts = []
                 for (let post of allPosts) {
@@ -70,14 +81,57 @@ class Bloodhound {
 
     // Принимает объект поста и возвращает true, если в нем есть подходящий файл, если нет 
     static async doesItHaveFiles (post, files) {
-        for (let checksFile of post.files) {
-            let checksFileName = checksFile.fullname.split('.')[0] 
-            let checksFileType = checksFile.fullname.split('.')[1]
+        console.log('Началось выполнение doesItHaveFiles')
+        return true
+        let nameCoincided = false 
 
-            for (let searchFile of files) {
-                // TODO: Присвоить fileType '.file' если он является пустой строкой
+        if (post.files.length != 0) {
+            for (let checksFile of post.files) {
+                if (checksFile.fullname != undefined) {
+                    let checksFileName = checksFile.fullname.split('.')[0] 
+                    let checksFileType = checksFile.fullname.split('.')[1]
+                    console.log('Проверяем имя...')
+                    for (let wantedFile of files) {
+                        console.log('checksFileName: ', checksFileName)
+                        console.log('wantedFile.fileName: ', wantedFile.fileName)
+                        if (wantedFile.fileName.length == 0) {
+                            nameCoincided = true
+                        } else {
+                            nameCoincided = (checksFileName == wantedFile.fileName)
+                        }
+
+                        if (nameCoincided) {
+                            console.log('Имя совпало, проверяем формат...')
+                            console.log('checksFileType: ', checksFileType)
+                            console.log('wantedFile.fileType: ', wantedFile.fileType)
+                            if (checksFileType == wantedFile.fileType) {
+                                console.log('Формат совпал, отправляем return')
+                                return true
+                            }
+                            for (let tags of ALL_TYPE_TAGS) {
+                                if (wantedFile.fileType == tags) return true
+                            }
+                            for (let tags of VIDEO_TYPE_TAGS) {
+                                if (wantedFile.fileType == tags) {
+                                    for (let format of VIDEO_FORMATS) {
+                                        if (checksFileType == format) return true
+                                    }                                    
+                                }
+                            }
+                            for (let tags of IMG_TYPE_TAGS) {
+                                if (wantedFile.fileType == tags) {
+                                    for (let format of IMG_FORMATS) {
+                                        if (checksFileType == format) return true
+                                    }                                    
+                                }
+                            }
+                        }
+                        console.log('Имя не совпало, файл не найден')
+                    }
+                }
             }
         }
+        return false
     }
 
     // Принимает объект поста и возвращает true, если в нем есть релевантный текст
@@ -99,12 +153,10 @@ class Bloodhound {
 
         for (let board of boards) {
             let listOfBoardThreads = await API_2ch.getListOfBoardThreads(board)
-            // console.log(listOfBoardThreads.threads)
             for (let thread of listOfBoardThreads.threads) {
                 if (isOP) {
                     data.push(thread)
                 } else {
-                    // console.log(thread.num)
                     let arrayOfPostsFromThisThread = await API_2ch.getPostsFromThisThread(board, thread.num)
                         for (let post of arrayOfPostsFromThisThread) {
                             data.push(post)

@@ -18,7 +18,7 @@ class Query {
         let text = [], modifier = [], files = []
     
         searchArr.forEach((item) => {
-            if (item.includes('.')) {
+            if (item.includes('.') && item.split('.')[1] != '') {
                 files.push({
                     fileName: item.split('.')[0], 
                     fileType: item.split('.')[1]
