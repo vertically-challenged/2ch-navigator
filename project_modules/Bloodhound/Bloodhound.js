@@ -120,7 +120,7 @@ class Bloodhound {
 
     // Принимает объект поста и возвращает true, если в нем есть релевантный текст
     static async doesItHaveText (post, text) {
-
+        return post.comment.toLowerCase().includes(text)
     }
 
     // isOP(массив модификаторов из searchQuery) => вернет true, если есть модификатор #OP, иначе false 
