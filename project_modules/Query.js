@@ -8,7 +8,7 @@ class Query {
 
         this.boards = boardsArr
         this.modifiers = searchObj.modifier
-        this.text = searchObj.text.join(' ')
+        this.text = searchObj.text.join(' ').toLowerCase()
         this.files = searchObj.files
     }
 
@@ -20,8 +20,8 @@ class Query {
         searchArr.forEach((item) => {
             if (item.includes('.') && item.split('.')[1] != '') {
                 files.push({
-                    fileName: item.split('.')[0], 
-                    fileType: item.split('.')[1]
+                    fileName: item.split('.')[0].toLowerCase(), 
+                    fileType: item.split('.')[1].toLowerCase()
                 })
             } else if (item.includes('#')) {
                 modifier.push(item)

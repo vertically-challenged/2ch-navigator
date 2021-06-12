@@ -13,6 +13,7 @@ class Bloodhound {
 // Способы поиска описываются как методы будущего объекта
 
     async defaultSearch (searchQuery) {
+
         try {
             let allPosts = await Bloodhound.getData(searchQuery.boards, await Bloodhound.isOP(searchQuery.modifiers))
             console.log('allPosts: ', allPosts.length)
@@ -54,7 +55,6 @@ class Bloodhound {
                 return firstOrderArray.concat(thirdOrderArray, secondOrderArray)
 
             } else if (checkFiles) {
-                // Проверь не выполняются ли if по очереди 
                 let relevantPosts = []
                 for (let post of allPosts) {
                     let itHasFiles = await Bloodhound.doesItHaveFiles(post, searchQuery.files)
@@ -80,9 +80,10 @@ class Bloodhound {
 
         if (post.files.length != 0) {
             for (let checksFile of post.files) {
-                if (checksFile.fullname != undefined) {
-                    let checksFileName = checksFile.fullname.split('.')[0] 
-                    let checksFileType = checksFile.fullname.split('.')[1]
+                if (checksFile.fullname != undefined) {                   
+                    let lowercaseFullname = checksFile.fullname.toLowerCase()
+                    let checksFileName = lowercaseFullname.split('.')[0]
+                    let checksFileType = lowercaseFullname.split('.')[1]
                     for (let wantedFile of files) {
                         if (wantedFile.fileName.length == 0) {
                             nameCoincided = true

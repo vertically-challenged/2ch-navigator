@@ -8,7 +8,7 @@ class HelperForStr {
             .forEach((item) => {
                 newStr += (item != char) ? item : '' 
             })
-
+                                
         return newStr
     }
 

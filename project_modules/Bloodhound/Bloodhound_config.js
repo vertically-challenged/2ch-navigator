@@ -6,19 +6,11 @@ module.exports = {
         }, 
         VIDEO_FILES: {
             classNames: ['video'], 
-            listOfFormats: [
-                'webm',
-                'mp4'
-            ]
+            listOfFormats: ['webm', 'mp4']
         }, 
         IMAGE_FILES: {
             classNames: ['image', 'img'], 
-            listOfFormats: [
-                'png',
-                'jpg', 
-                'jpeg', 
-                'gif'
-            ]
+            listOfFormats: ['png', 'jpg', 'jpeg', 'gif']
         }
     }
 }
