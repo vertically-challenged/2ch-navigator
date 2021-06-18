@@ -1,6 +1,7 @@
 body {
     font-family: sans-serif;
-    font-size: 14pt ;
+    font-size: 12pt ;
+    background-color: #eeeeee;
 }
 .container {
     /* border: 2px solid red; */
@@ -11,6 +12,16 @@ body {
     margin: 0 auto;
 
     max-width: 960px;
+}
+
+a {
+    color: #ff5900;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b23b00;
+    transition: .3s;
 }
 
 .hidden {

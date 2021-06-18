@@ -1,0 +1,29 @@
+{{#if searchResults.length}}
+{{#each searchResults}}
+<div class="post">
+    <div class="post__head">
+        {{#if subject}}
+        <span class="post__subject">{{subject}}</span>
+        {{/if}}
+        <span class="post__name">{{name}}</span>
+        <span class="post__data">{{date}}</span>
+        <span class="post__num">
+            <a class="post__link" href="{{link}}">№{{num}}</a>
+        </span>
+    </div>
+    <div class="post__content">
+        {{#if files.length}}
+            <div class="file__container">
+            {{#each files}}
+                <div class="file post__file">
+                    <div class="file__name"><a class="file__full-size-link" href="https://2ch.hk{{path}}">{{displayname}}</a></div>
+                    <img class="file__preview" src="https://2ch.hk{{thumbnail}}" alt="Для доступа к изображению купите пасскод">
+                </div>
+            {{/each}}
+            </div>
+        {{/if}}
+        <div class="post__comment">{{{comment}}}</div>
+    </div>
+</div>
+{{/each}}
+{{/if}}

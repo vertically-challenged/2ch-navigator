@@ -1,7 +1,8 @@
 <form action="/" method="GET" class="search">
-    <input name="boards" type="text" class="search__boards" placeholder="/b /rf">
+    <input name="boards" type="text" class="search__boards" placeholder="/b /rf" value="{{DEFAULT_BOARD}}">
+    <span class="search__help" title="В это поле вы можете указать несколько досок через пробел">?</span>
     <div class="search__line">
-        <input name="search" id="search" class="search__input" type="search" placeholder=".file Пример текста" autofocus> 
+        <input name="search" id="search" class="search__input" type="search" placeholder=".file Опять на работу #OP" value="{{searchText}}" autofocus> 
         <button class="search__button" type="submit"><span class="hidden">Кнопка поиска</span></button>
     </div>
     {{> help }}

@@ -5,8 +5,9 @@
 .help__button {
     display: inline-block;
     margin: 20px;
+    margin-bottom: 0px;
     cursor: pointer;
-    color: rgb(233, 151, 0);
+    color: #ff5900;
     opacity: .7;
 }
 
@@ -31,6 +32,7 @@
 
 .help__container {
     display: none;
+    margin-left: 20px;
 }
 
 .help__checkbox:checked ~ .help__container {

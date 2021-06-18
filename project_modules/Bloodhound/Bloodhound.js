@@ -15,6 +15,7 @@ class Bloodhound {
     async defaultSearch (searchQuery) {
 
         try {
+            if (searchQuery.files.length == 0 && searchQuery.text == '') return []
             let allPosts = await Bloodhound.getData(searchQuery.boards, await Bloodhound.isOP(searchQuery.modifiers))
             console.log('allPosts: ', allPosts.length)
 
@@ -139,10 +140,14 @@ class Bloodhound {
             let listOfBoardThreads = await API_2ch.getListOfBoardThreads(board)
             for (let thread of listOfBoardThreads.threads) {
                 if (isOP) {
+                    //FIXME: Пока пропишу добавление ссылки на пост прямо здесь, но если это будет слишком медленно работать, то это стоит исправить 
+                    thread.link = `https://2ch.hk/${board}/res/${thread.num}.html`
+                    if (board == 'b') delete thread.subject
                     data.push(thread)
                 } else {
                     let arrayOfPostsFromThisThread = await API_2ch.getPostsFromThisThread(board, thread.num)
                         for (let post of arrayOfPostsFromThisThread) {
+                            post.link = `https://2ch.hk/${board}/res/${thread.num}.html#${post.num}`
                             data.push(post)
                         }
                 }
