@@ -17,7 +17,7 @@ class Bloodhound {
         try {
             if (searchQuery.files.length == 0 && searchQuery.text == '') return []
             let allPosts = await Bloodhound.getData(searchQuery.boards, await Bloodhound.isOP(searchQuery.modifiers))
-            console.log('allPosts: ', allPosts.length)
+            // console.log('allPosts: ', allPosts.length)
 
             let checkFiles = (searchQuery.files.length != 0) ? true : false
             let checkText = (searchQuery.text.length != 0) ? true : false
