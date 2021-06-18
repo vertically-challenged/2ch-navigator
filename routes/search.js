@@ -1,4 +1,4 @@
-const {Router, query} = require('express')
+const {Router} = require('express')
 const router = Router()
 
 const Query = require('../project_modules/Query')

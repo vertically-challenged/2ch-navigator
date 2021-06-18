@@ -5,6 +5,7 @@ const exphbs = require("express-handlebars");
 
 const error404 = require("./middleware/error404");
 const searchRouter = require("./routes/search");
+const helpRouter = require("./routes/help");
 
 const app = express();
 const hbs = exphbs.create({
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/', searchRouter);
+app.use('/help', helpRouter);
 app.use(error404);
 
 const PORT = process.env.PORT || 3000

@@ -70,3 +70,19 @@
     background-color: #555;
     transition: .3s;
 }
+
+@media (max-width: 600px) {
+    .search__help {
+        display: none;
+    }
+
+    .search__boards {
+        width: 210px;
+    }
+}
+
+@media (max-width: 450px) {
+    .search__input::placeholder {
+        color: #eeeeee;
+    }
+}

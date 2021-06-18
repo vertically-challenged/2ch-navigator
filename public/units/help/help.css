@@ -38,3 +38,19 @@
 .help__checkbox:checked ~ .help__container {
     display: block;
 }
+
+.help-for-small-screen {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .help {
+        display: none;
+    }
+    .help-for-small-screen {
+        display: block;
+        
+        margin: 20px;
+        margin-bottom: 0px;
+    }
+}
