@@ -10,22 +10,32 @@ const bloodhoundObj = new Bloodhound()
 
 router.get('/', async (req, res) => {
     // const searchResults = []
+    let boardsStr = '/b'
+    if (req.cookies.boardsStr) {
+        boardsStr = req.cookies.boardsStr
+    } 
+    if (req.query.boards) boardsStr = req.query.boards
+
+    res.cookie('boardsStr', boardsStr)
+
     try {
 
         if (!(req.query == undefined || Object.keys(req.query).length == 0)) {
             let searchQuery = new Query(req.query)
             var searchResults = await bloodhoundObj.defaultSearch(searchQuery)
-            // console.log(searchResults[1])
+            console.log(searchQuery)
             // console.log(req.query)
             // console.log('Запрос...')
             // console.log('Релевантные посты', await bloodhoundObj.defaultSearch(searchQuery))
         }
 
+        console.log('Cookie: ', req.cookies)
+
         res.render('index', {
             title: '2ch navigator', 
             searchResults, 
             searchText: req.query.search,
-            DEFAULT_BOARD: '/b'
+            DEFAULT_BOARD: boardsStr
         });
 
     } catch (err) {

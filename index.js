@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
 const exphbs = require("express-handlebars");
+const cookieParser = require('cookie-parser')
 
 const error404 = require("./middleware/error404");
 const searchRouter = require("./routes/search");
@@ -21,6 +22,7 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser('YEqNC69VXyPMSC38cWgW'))
 
 app.use('/', searchRouter);
 app.use('/help', helpRouter);
