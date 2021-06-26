@@ -1,2 +1,3 @@
-import {hello} from './units/post/post.js'
-hello()
+import {viewport} from './units/viewport/viewport.js'
+
+viewport()

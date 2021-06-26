@@ -1,0 +1,40 @@
+.viewport {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 100vw;
+    max-height: 100vh;
+    background-color: rgba(85, 85, 85, 0.452)
+}
+
+.viewport__file-name {
+    margin: 0;
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+    color: #555;
+}
+
+.viewport__content {
+    background-color: #555;
+    padding: 5px;
+    max-width: 90%;
+    max-height: 90%;
+
+    /* width: auto;  */
+    /* height: auto; */
+    /* Эти width и height параметры будет изменяться при масштабировании, 
+    но они должен быть ограничен в JS в зависимости от пропорций, 
+    чтобы пропорции не терялись */
+}
+
+.viewport__video {
+    cursor: pointer;
+}
