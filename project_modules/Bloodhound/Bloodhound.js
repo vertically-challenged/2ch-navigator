@@ -4,7 +4,6 @@ const ALL_TYPE_TAGS = config.fileTypeClasses.ALL_FILES.classNames
 const VIDEO_TYPE_TAGS = config.fileTypeClasses.VIDEO_FILES.classNames
 const VIDEO_FORMATS = config.fileTypeClasses.VIDEO_FILES.listOfFormats
 const IMG_TYPE_TAGS = config.fileTypeClasses.IMAGE_FILES.classNames
-const IMG_FORMATS = config.fileTypeClasses.IMAGE_FILES.listOfFormats
 
 class Bloodhound {
     constructor () {
@@ -155,6 +154,7 @@ class Bloodhound {
                     let arrayOfPostsFromThisThread = await API_2ch.getPostsFromThisThread(board, thread.num)
                         for (let post of arrayOfPostsFromThisThread) {
                             post.link = `https://2ch.hk/${board}/res/${thread.num}.html#${post.num}`
+                            if (board == 'b') delete post.subject
                             data.push(post)
                         }
                 }
