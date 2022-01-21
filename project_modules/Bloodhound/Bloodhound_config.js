@@ -1,5 +1,6 @@
 module.exports = {
-    DEFAULT_BOARDS: ['b'],
+    DEFAULT_BOARDS: ['pr'],
+    BLOCKED_BOARDS: ['fg','fur','gg','ga','hc','e','fet','sex','fag','d','b','soc','media','r','api','rf','o'],
     fileTypeClasses: {
         ALL_FILES: {
             classNames: ['file']

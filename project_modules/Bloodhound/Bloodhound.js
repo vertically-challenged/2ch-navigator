@@ -58,14 +58,7 @@ class Bloodhound {
             } else if (checkFiles) {
                 let relevantPosts = []
                 for (let post of allPosts) {
-                    // if (post.files.length != 0){
-                    //     console.log('--------')
-                    //     console.log(post.files[0].path)
-                    //     console.log(post.files[0].type)
-                    //     console.log('--------')
-                    // }
                     let itHasFiles = await Bloodhound.doesItHaveFiles(post, searchQuery.files)
-                    // TODO: В этом if (ниже) можно добавить вызов функции проверки формата файла video or img и добавлять к post соответствующее поле, если способ с type перестанет работать. Тоже необходимо будет сделать и в варианте выше: (checkFiles && checkText)
                     if (itHasFiles) relevantPosts.push(post)
                 }
                 return relevantPosts
@@ -144,6 +137,8 @@ class Bloodhound {
         let data = []
 
         for (let board of boards) {
+            if (config.BLOCKED_BOARDS.includes(board)) continue
+
             let listOfBoardThreads = await API_2ch.getListOfBoardThreads(board)
             for (let thread of listOfBoardThreads.threads) {
                 if (isOP) {

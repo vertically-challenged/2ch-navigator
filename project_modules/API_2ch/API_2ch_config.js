@@ -1,5 +1,5 @@
 module.exports = {
-    DEFAULT_BOARD: 'b',
+    DEFAULT_BOARD: 'pr',
     ALL_THREADS_LINK: `https://2ch.hk/BOARD_LATTER/catalog.json`, 
     THREAD_LINK: 'https://2ch.hk/BOARD_LATTER/res/THREAD_NUMBER.json',
     PLUGS: {
