@@ -126,6 +126,7 @@ class Bloodhound {
 
     // isOP(массив модификаторов из searchQuery) => вернет true, если есть модификатор #OP, иначе false 
     static async isOP(modifiers) {
+        if (config.ONLY_OP) return config.ONLY_OP
         for (let item of modifiers) {
             if (item === '#OP') return true
         }

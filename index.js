@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const fetch = require('node-fetch');
 const exphbs = require("express-handlebars");
 const cookieParser = require('cookie-parser')
 
@@ -33,3 +32,16 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
+
+
+// https.createServer(
+//     {
+//       key: fs.readFileSync("rootCA.key"),
+//       cert: fs.readFileSync("rootCA.pem"),
+//     },
+//     app
+//   )
+//   .listen(PORT, function () {
+//     console.log(`Server is running on port ${PORT}`)
+//     }
+// );
