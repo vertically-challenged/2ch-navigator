@@ -81,8 +81,8 @@
     }
 }
 
-@media (max-width: 450px) {
+/* @media (max-width: 450px) {
     .search__input::placeholder {
         color: #eeeeee;
     }
-}
+} */
