@@ -1,4 +1,9 @@
 # 2ch-navigator
+
+- [Посмотреть в работе](https://navigator-2ch.herokuapp.com)
+- [Другие проекты](https://vertically-challenged.github.io/react_calc/)
+
+---
  
 ![Снимок экрана 2021-09-29 в 19 34 12](https://user-images.githubusercontent.com/50969768/135311336-bb551d8d-abf8-47c9-9c71-fe46482935e8.png)
 
