@@ -1,7 +1,7 @@
 # 2ch-navigator
 
 - [Посмотреть в работе](https://navigator-2ch.herokuapp.com)
-- [Другие проекты](https://vertically-challenged.github.io/react_calc/)
+- [Другие проекты](https://vertically-challenged.github.io/)
 
 ---
  
